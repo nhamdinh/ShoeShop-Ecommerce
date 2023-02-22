@@ -9,6 +9,7 @@ const multer = require("multer");
 const path = require("path");
 const products = require("./data/products");
 const ImportData = require("./DataImport");
+const productRoute = require("./Routes/ProductRoutes");
 
 const app = express();
 app.use(
@@ -46,9 +47,7 @@ app.get("/", (req, res) => {
 // API
 app.use("/api/import", ImportData);
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
+app.use("/api/products", productRoute);
 
 app.get("/api/products/:id", (req, res) => {
   const product = products.find((p) => p._id === req.params.id);
